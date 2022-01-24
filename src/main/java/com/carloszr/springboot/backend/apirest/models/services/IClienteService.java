@@ -2,6 +2,9 @@ package com.carloszr.springboot.backend.apirest.models.services;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 import com.carloszr.springboot.backend.apirest.models.entity.Cliente;
 
 public interface IClienteService {
@@ -9,6 +12,10 @@ public interface IClienteService {
 	// Listar todos los clientes.
 
 	public List<Cliente> findAll();
+	
+	// Listar con Page.
+	
+	public Page<Cliente> findAll(Pageable pageable);
 	
 	// Encontrar y devolver un cliente.
 	
