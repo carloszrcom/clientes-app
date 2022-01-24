@@ -1,0 +1,69 @@
+<!-- Plantilla de errores. -->
+<ul class="alert alert-danger" *ngIf="errores?.length > 0">
+    <li *ngFor="let err of errores">
+        <p>{{ err }}</p>
+    </li>
+</ul>
+
+<!-- Plantilla de formulario. -->
+<div class="card bg-dark text-white my-2">
+    <div class="card-header">{{ titulo }}</div>
+    <div class="card-body">
+        <!-- <form (ngSubmit)="create()"> -->
+        <form #clienteForm="ngForm">
+            <div class="form-group row my-2">
+                <label for="nombre" class="col-form-label col-sm-2">Nombre</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" [(ngModel)]="cliente.nombre" name="nombre" #nombre="ngModel"> <!-- required minlength="4" -->
+                    <div class="alert alert-danger" *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)">
+                        <!-- Mensaje de error para el required. -->
+                        <div *ngIf="nombre.errors['required']">
+                            <p>El nombre es requerido.</p>
+                        </div>
+                        <div *ngIf="nombre.errors['minlength']">
+                            <p>El nombre debe tener al menos 4 caracteres.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row my-2">
+                <label for="apellido" class="col-form-label col-sm-2">Apellido</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" [(ngModel)]="cliente.apellidos" name="apellidos" #apellidos="ngModel"> 
+                    <div class="alert alert-danger" *ngIf="apellidos.invalid && (apellidos.dirty || apellidos.touched)">
+                        <!-- Mensaje de error para el required. -->
+                        <div *ngIf="apellidos.errors['required']">
+                            <p>Los apellidos son requeridos.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row my-2">
+                <label for="email" class="col-form-label col-sm-2">Email</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" [(ngModel)]="cliente.email" name="email" #email="ngModel"> <!-- required email -->
+                    <div class="alert alert-danger" *ngIf="email.invalid && (email.dirty || email.touched)">
+                        <!-- Mensaje de error para el required. -->
+                        <div *ngIf="email.errors['required']">
+                            <p>El email es requerido.</p>
+                        </div>
+                        <!-- Mensaje de error para el formato del email. -->
+                        <div *ngIf="email.errors['email']">
+                            <p>El email debe tener un formato válido.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row my-3">
+                <div class="col-sm-6">
+                    <button class="btn btn-primary" role="button" (click)="create()" *ngIf="!cliente.id; else elseBlock;" [disabled]="!clienteForm.form.valid">Crear</button>
+                    
+                    <!-- Plantilla a usar si el cliente existe y hay que actualizarlo. -->
+                    <ng-template #elseBlock>
+                        <button class="btn btn-primary" role="button" (click)="update()" [disabled]="!clienteForm.form.valid">Actualizar</button>
+                    </ng-template>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,27 @@
+/* Populate tabla clientes */
+INSERT INTO clientes (nombre, apellidos, email, create_at) VALUES('Carlos1', 'Z1', 'carlos1@carloszr.com', '2022-01-01');
+INSERT INTO clientes (nombre, apellidos, email, create_at) VALUES('Carlos2', 'Z2', 'carlos2@carloszr.com', '2022-01-02');
+INSERT INTO clientes (nombre, apellidos, email, create_at) VALUES('Carlos3', 'Z3', 'carlos3@carloszr.com', '2022-01-03');
+INSERT INTO clientes (nombre, apellidos, email, create_at) VALUES('Carlos4', 'Z4', 'carlos4@carloszr.com', '2022-01-04');
+INSERT INTO clientes (nombre, apellidos, email, create_at) VALUES('Carlos5', 'Z5', 'carlos5@carloszr.com', '2022-01-05');
+INSERT INTO clientes (nombre, apellidos, email, create_at) VALUES('Carlos6', 'Z6', 'carlos6@carloszr.com', '2022-01-06');
+INSERT INTO clientes (nombre, apellidos, email, create_at) VALUES('Carlos7', 'Z7', 'carlos7@carloszr.com', '2022-01-07');
+INSERT INTO clientes (nombre, apellidos, email, create_at) VALUES('Carlos8', 'Z8', 'carlos8@carloszr.com', '2022-01-08');
+INSERT INTO clientes (nombre, apellidos, email, create_at) VALUES('Carlos9', 'Z9', 'carlos9@carloszr.com', '2022-01-09');
+INSERT INTO clientes (nombre, apellidos, email, create_at) VALUES('Carlos1', 'Z1', 'carlos1@carloszr.com', '2022-01-01');
+INSERT INTO clientes (nombre, apellidos, email, create_at) VALUES('Carlos2', 'Z2', 'carlos2@carloszr.com', '2022-01-02');
+INSERT INTO clientes (nombre, apellidos, email, create_at) VALUES('Carlos3', 'Z3', 'carlos3@carloszr.com', '2022-01-03');
+INSERT INTO clientes (nombre, apellidos, email, create_at) VALUES('Carlos4', 'Z4', 'carlos4@carloszr.com', '2022-01-04');
+INSERT INTO clientes (nombre, apellidos, email, create_at) VALUES('Carlos5', 'Z5', 'carlos5@carloszr.com', '2022-01-05');
+INSERT INTO clientes (nombre, apellidos, email, create_at) VALUES('Carlos6', 'Z6', 'carlos6@carloszr.com', '2022-01-06');
+INSERT INTO clientes (nombre, apellidos, email, create_at) VALUES('Carlos7', 'Z7', 'carlos7@carloszr.com', '2022-01-07');
+INSERT INTO clientes (nombre, apellidos, email, create_at) VALUES('Carlos8', 'Z8', 'carlos8@carloszr.com', '2022-01-08');
+INSERT INTO clientes (nombre, apellidos, email, create_at) VALUES('Carlos9', 'Z9', 'carlos9@carloszr.com', '2022-01-09');INSERT INTO clientes (nombre, apellidos, email, create_at) VALUES('Carlos1', 'Z1', 'carlos1@carloszr.com', '2022-01-01');
+INSERT INTO clientes (nombre, apellidos, email, create_at) VALUES('Carlos2', 'Z2', 'carlos2@carloszr.com', '2022-01-02');
+INSERT INTO clientes (nombre, apellidos, email, create_at) VALUES('Carlos3', 'Z3', 'carlos3@carloszr.com', '2022-01-03');
+INSERT INTO clientes (nombre, apellidos, email, create_at) VALUES('Carlos4', 'Z4', 'carlos4@carloszr.com', '2022-01-04');
+INSERT INTO clientes (nombre, apellidos, email, create_at) VALUES('Carlos5', 'Z5', 'carlos5@carloszr.com', '2022-01-05');
+INSERT INTO clientes (nombre, apellidos, email, create_at) VALUES('Carlos6', 'Z6', 'carlos6@carloszr.com', '2022-01-06');
+INSERT INTO clientes (nombre, apellidos, email, create_at) VALUES('Carlos7', 'Z7', 'carlos7@carloszr.com', '2022-01-07');
+INSERT INTO clientes (nombre, apellidos, email, create_at) VALUES('Carlos8', 'Z8', 'carlos8@carloszr.com', '2022-01-08');
+INSERT INTO clientes (nombre, apellidos, email, create_at) VALUES('Carlos9', 'Z9', 'carlos9@carloszr.com', '2022-01-09');
