@@ -16,24 +16,21 @@ export class ClientesComponent implements OnInit {
   constructor(private clienteService: ClienteService) { }
 
   ngOnInit(): void {
-    // this.clientes = this.clienteService.getClientes();
-    // this.clienteService.getClientes.subscribe(
-    //   clientes => this.clientes = clientess
-    // );
 
-    this.clienteService.getClientes().pipe(
-      tap(clientes => {
+    let page = 0;
 
-        this.clientes = clientes; // Antes lo realizábamos en el subscribe.
+    this.clienteService.getClientes(page).pipe(
+      tap(response => {
+
+        //this.clientes = response; // Antes lo realizábamos en el subscribe.
         console.log('ClientesComponent tap3');
-        clientes.forEach(
+        (response.content as Cliente[]).forEach(
           cliente => {
             console.log(cliente.nombre);
           }
         );
       })
-    ).subscribe();
-    //.subscribe(clientes => this.clientes = clientes);
+    ).subscribe(response => this.clientes = response.content as Cliente[]);
   }
 
   // Borrar cliente.
@@ -74,11 +71,4 @@ export class ClientesComponent implements OnInit {
       }
     })
   }
-
-  // Esto es lo mismo que hay en el subscribe pero sin abreviar.
-  // function(clientes) {
-  //   this.clientes = clientes
-  // }
-
-
 }

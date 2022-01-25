@@ -1,12 +1,12 @@
-import { DatePipe, formatDate } from '@angular/common';
+// import { DatePipe, formatDate } from '@angular/common';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable, of, throwError } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { map, catchError, tap } from 'rxjs/operators';
 import Swal from 'sweetalert2';
 import { Cliente } from './cliente';
-import { CLIENTES } from './clientes.json';
+// import { CLIENTES } from './clientes.json';
 
 @Injectable({
   providedIn: 'root'
@@ -14,67 +14,39 @@ import { CLIENTES } from './clientes.json';
 export class ClienteService {
 
   private urlEndPoint: string = "http://localhost:8080/api/clientes";
-
   private httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
 
   constructor(private http: HttpClient, private router: Router) {}
 
-  // Método asíncrono.
-  // of convierte CLIENTES en un stream reactivo.
-  // Otra forma de hacerlo usando el operador map.
-
-  public getClientes(): Observable<Cliente[]> {
-    // return of(CLIENTES);
-    return this.http.get(this.urlEndPoint).pipe(
+  public getClientes(page: number): Observable<any> {
+    
+    return this.http.get(this.urlEndPoint + '/page/' + page).pipe(
       
       // El operazor tap realiza algo, pero no transforma.
       tap(
-        response => {
+        (response: any) => {
           console.log('DEBUG: ClienteService tap 1');
-          let clientes = response as Cliente[];
-          clientes.forEach(cliente => {
-            console.log(cliente.nombre);
+          
+          // Casting.
+          (response.content as Cliente[]).forEach(cliente => {
+          console.log(cliente.nombre);
           });
         }
       ),
-      map((response) => {
+      map((response: any) => {
         
-        let clientes = response as Cliente[];
-        return clientes.map(
+        (response.content as Cliente[]).map(
           cliente => {
             cliente.nombre = cliente.nombre.toUpperCase();
-            
-            // Una forma de cambiar el formato de la fecha.
-            // cliente.createAt = formatDate(cliente.createAt, 'dd-MM-yyyy', 'en-US');
-
-            // Añadir español al locale. Por defecto es 'en-US' y no hay que hacer import.
-            // Mejor lo añadimos en el appmodule. Así está importado para toda la app.
-            // registerLocaleData(localeES, 'es');
-
-            // Otra forma de cambiar el formato de la fecha.
-            // let datePipe = new DatePipe('en-US');
-            let datePipe = new DatePipe('es');
-
-            // Día de la semana abreviado:
-            // cliente.createAt = datePipe.transform(cliente.createAt, 'EEE dd/MM/yyyy');
-            // Nombre del mes abreviado:
-            // cliente.createAt = datePipe.transform(cliente.createAt, 'EEEE dd/MMM/yyyy');
-            // Nombre del mes completo:
-            // cliente.createAt = datePipe.transform(cliente.createAt, 'EEEE dd/MMMM/yyyy');
-            // Fecha completa:
-            // cliente.createAt = datePipe.transform(cliente.createAt, 'fullDate');
-            
-            // Comentamos esto para realizar la conversión de la fecha en la plantilla html.
-            // cliente.createAt = datePipe.transform(cliente.createAt, 'EEEE dd, MMMM yyyy');
-
             return cliente;
           }
         );
+        return response;
       }),
       tap(
         response => {
           console.log('DEBUG: ClienteService tap 2');
-          response.forEach(cliente => {
+          (response.content as Cliente[]).forEach(cliente => {
             console.log(cliente.nombre);
           });
         }
@@ -154,35 +126,4 @@ export class ClienteService {
     );
   }
 
-  // Crear cliente. Creamos un Observable de tipo any y así no tenemos que hacer el map para convertir a un observable de tipo Cliente.
-  // public create(cliente: Cliente): Observable<any> {
-  //   return this.http.post<any>(this.urlEndPoint, cliente, {headers: this.httpHeaders}).pipe(
-  //     catchError(
-  //       e => {
-  //         console.error(e.error.mensaje);
-  //         Swal.fire(e.error.mensaje, e.error.error, 'error');
-  //         return throwError(() => e);
-  //       }
-  //     )
-  //   );
-  // }
-
-
-  // Sin Observable (cuando era un método síncrono).
-  // getClientes(): Cliente[] {
-  //   return CLIENTES;
-  // }
-
-  // Método asíncrono.
-  // of convierte CLIENTES en un stream reactivo.
-  // getClientes(): Observable<Cliente[]> {
-  //   // return of(CLIENTES);
-  //   return this.http.get<Cliente[]>(this.urlEndPoint);
-  // }
-
-  // Obtener un cliente por su id.
-  // public getCliente(id: number): Observable<Cliente> {
-  //   console.log('Ejecutando desde cliente.service el getCliente')
-  //   return this.http.get<Cliente>(`${this.urlEndPoint}/${id}`);
-  // }
 }
