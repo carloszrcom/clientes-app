@@ -11,17 +11,15 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ClientesComponent implements OnInit {
 
-  // Array con los clientes.
   clientes: Cliente[];
+  paginador: any;
 
   constructor(private clienteService: ClienteService, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
-
     
     // paramMap se encarga de observar.
-    this.activatedRoute.paramMap.subscribe(
-      
+    this.activatedRoute.paramMap.subscribe( 
       params => {
         
         // El operador de suma + convierte el string a number.
@@ -34,7 +32,6 @@ export class ClientesComponent implements OnInit {
         this.clienteService.getClientes(page).pipe(
           tap(response => {
     
-            //this.clientes = response; // Antes lo realizábamos en el subscribe.
             console.log('ClientesComponent tap3');
             (response.content as Cliente[]).forEach(
               cliente => {
@@ -42,8 +39,11 @@ export class ClientesComponent implements OnInit {
               }
             );
           })
-        ).subscribe(response => this.clientes = response.content as Cliente[]);
-        
+        ).subscribe(
+          response => {
+            this.clientes = response.content as Cliente[];
+            this.paginador = response;
+          });
       }
     );
   }

@@ -7,12 +7,14 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { DirectivaComponent } from './directiva/directiva.component';
 import { ClientesComponent } from './clientes/clientes.component';
+import { FormComponent } from './clientes/form.component';
+import { PaginatorComponent } from './paginator/paginator.component';
+
 import { RouterModule, Routes } from '@angular/router';
 
 // Implementar servicio Angular. Lo usamos en la clase Service.
 import { HttpClientModule } from '@angular/common/http';
 
-import { FormComponent } from './clientes/form.component';
 import { FormsModule } from '@angular/forms';
 import { ClienteService } from './clientes/cliente.service';
 
@@ -40,7 +42,8 @@ const routes: Routes = [
     FooterComponent,
     DirectivaComponent,
     ClientesComponent,
-    FormComponent
+    FormComponent,
+    PaginatorComponent
   ],
   imports: [
     BrowserModule,
