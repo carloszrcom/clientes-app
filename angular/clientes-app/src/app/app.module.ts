@@ -21,6 +21,13 @@ import { ClienteService } from './clientes/cliente.service';
 // Locale.
 import { registerLocaleData } from '@angular/common';
 import localeES from '@angular/common/locales/es';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+
+// Material Datepicker.
+import { MatDatepickerModule } from '@angular/material/datepicker';
+// import { MatNativeDateModule } from '@angular/material/core';
+import { MatMomentDateModule } from '@angular/material-moment-adapter';
+
 
 // Locale.
 registerLocaleData(localeES, 'es');
@@ -49,7 +56,10 @@ const routes: Routes = [
     BrowserModule,
     HttpClientModule,
     FormsModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    NoopAnimationsModule,
+    MatDatepickerModule,
+    MatMomentDateModule
   ],
   providers: [ClienteService, {provide: LOCALE_ID, useValue: 'es'}],
   bootstrap: [AppComponent]

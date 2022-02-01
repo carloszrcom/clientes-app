@@ -1,5 +1,39 @@
-<ul *ngIf="paginas?.length > 0" class="pagination">
-    <li *ngFor="let pagina of paginas">
-        <p>{{pagina}}</p>
+<ul *ngIf="paginas?.length > 0" class="pagination" style="overflow: scroll;">
+    <!-- Vover atrás. -->
+    <!-- Oculta el botón de volver atrás si estamos en la primera página. -->
+    <li class="page-item" *ngIf="paginado.number > 0">
+        <a class="page-link" [routerLink]="['/clientes/page', paginado.number - 1]">&laquo;</a>
+    </li>
+
+    <!-- Primera página. -->
+    <!-- <li [ngClass]="(paginado.number == 0)?'disabled page-item': ''">
+        <a class="page-link" [routerLink]="['/clientes/page', 0]">Primera</a>
+    </li> -->
+    
+    <!-- Primera página, otra forma. -->
+    <li [ngClass]="(paginado.first)?'disabled page-item': ''">
+        <a class="page-link" [routerLink]="['/clientes/page', 0]">Primera</a>
+    </li>
+    
+    <li class="page-item" *ngFor="let pagina of paginas" [ngClass]="(pagina - 1 == paginado.number)?'active': ''">
+        <!-- No se muestra link para la página actual. -->
+        <span class="page-link" *ngIf="pagina - 1 == paginado.number">{{pagina}}</span>
+        <a class="page-link" *ngIf="pagina - 1 != paginado.number" [routerLink]="['/clientes/page', pagina - 1]">{{pagina}}</a>
+    </li>
+    
+    <!-- Última página. -->
+    <!-- <li [ngClass]="(paginado.number == paginado.totalPages - 1)?'disabled page-item': ''">
+        <a class="page-link" [routerLink]="['/clientes/page', paginado.totalPages - 1]">Última</a>
+    </li> -->
+
+    <!-- Última página, otra forma de hacerlo. -->
+    <li [ngClass]="(paginado.last)?'disabled page-item': ''">
+        <a class="page-link" [routerLink]="['/clientes/page', paginado.totalPages - 1]">Última</a>
+    </li>
+
+    <!-- Siguiente. -->
+    <!-- Oculta el botón de siguiente si estamos en la última página. -->
+    <li class="page-item" *ngIf="paginado.number < paginado.totalPages - 1">
+        <a class="page-link" [routerLink]="['/clientes/page', paginado.number + 1]">&raquo;</a>
     </li>
 </ul>

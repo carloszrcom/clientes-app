@@ -8,12 +8,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.PrePersist;
+//import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
@@ -33,21 +34,31 @@ public class Cliente implements Serializable {
 	@Column(name = "apellidos")
 	private String apellidos;
 	
+	
+	/**
+	 * En producción poner unique true para no tener emails duplicados.
+	 */
+	
 	@NotEmpty(message = "no puede estar vacío.")
 	@Email(message = "no es una dirección de correo correcta.")
-	@Column(name = "email", nullable = false, unique = true, length = 200)
+	@Column(name = "email", nullable = false, unique = false, length = 200)
 	private String email;
 	
+	@NotNull(message = "no puede ser null.")
 	@Column(name = "create_at")
 	@Temporal(TemporalType.DATE)
 	private Date createAt;
 	
-	// Evento del ciclo de vida de las clases entity.
+	/**
+	 * Evento del ciclo de vida de las clases entity.
+	 */
 	
-	@PrePersist
-	public void prePersist() {
-		createAt = new Date();
-	}
+	// Ahora se maneja la fecha con un DatePicker en el formulario.
+	
+//	@PrePersist
+//	public void prePersist() {
+//		createAt = new Date();
+//	}
 	
 	public Long getId() {
 		return id;

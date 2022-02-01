@@ -54,6 +54,27 @@
                     </div>
                 </div>
             </div>
+
+
+            <!-- Fecha. -->
+            <div class="form-group row my-2">
+                <label for="createAt" class="col-form-label col-sm-2">Fecha</label>
+                <div class="col-sm-6">
+                    <!-- <input type="date" class="form-control" [(ngModel)]="cliente.createAt" name="createAt"> -->
+
+                    <!-- Fecha con Angular Material. -->
+                    <input matInput [matDatepicker]="miPicker" class="form-control" [(ngModel)]="cliente.createAt" name="createAt" style="display: inline; width: 300px;">
+                    <!-- for enlaza cada vez que hacemos referencia a nuestro calendario (mat-datepicker), cada vez que hacemos un click lo enlaza al input., -->
+                    <!-- y pasamos la instancia del calendario al input. -->
+                    <mat-datepicker-toggle matSuffix [for]="miPicker"></mat-datepicker-toggle>
+                    <!-- Con # estamos creando una variable de contexto de la vista que contiene una referencia de componente. -->
+                    <mat-datepicker #miPicker></mat-datepicker>
+
+                </div>
+            </div>
+
+
+
             <div class="form-group row my-3">
                 <div class="col-sm-6">
                     <button class="btn btn-primary" role="button" (click)="create()" *ngIf="!cliente.id; else elseBlock;" [disabled]="!clienteForm.form.valid">Crear</button>
