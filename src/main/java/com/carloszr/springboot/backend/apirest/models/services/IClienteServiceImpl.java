@@ -58,6 +58,4 @@ public class IClienteServiceImpl implements IClienteService {
 		clienteDao.deleteById(id);
 	}
 
-	
-
 }
