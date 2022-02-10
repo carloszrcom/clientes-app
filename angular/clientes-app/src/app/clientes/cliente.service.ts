@@ -157,7 +157,7 @@ export class ClienteService {
     formData.append("archivo", archivo);
     formData.append("id", id);
 
-    return this.http.post(`${this.urlEndPoint}/upload/`, formData).pipe(
+    return this.http.post(`${this.urlEndPoint}/upload`, formData).pipe(
       map(
         // (response) => console.info(response)
         (response: any) => response.cliente as Cliente

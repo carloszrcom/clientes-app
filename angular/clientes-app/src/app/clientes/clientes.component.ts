@@ -48,7 +48,11 @@ export class ClientesComponent implements OnInit {
     );
   }
 
-  // Borrar cliente.
+  /**
+   * Borrar cliente.
+   * @param cliente 
+   */
+  
   public delete(cliente: Cliente): void {
     const swalWithBootstrapButtons = Swal.mixin({
       customClass: {

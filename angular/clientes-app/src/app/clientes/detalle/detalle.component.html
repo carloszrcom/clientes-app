@@ -2,11 +2,29 @@
     <div class="card-header">{{ titulo }}</div>
     <div class="card-body">
 
-        <!-- Input. -->
-        <div class="input-group">
-            <input (change)="seleccionarFoto($event)" type="file" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
-            <button (click)="subirFoto()" class="btn btn-outline-secondary" type="button" id="inputGroupFileAddon04">Aceptar</button>
-        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm">
+
+                    <ul *ngIf="cliente" class="list-group text-dark mb-3">
+                        <li class="list-group-item">{{cliente.nombre}}</li>
+                        <li class="list-group-item">{{cliente.apellidos}}</li>
+                        <li class="list-group-item">{{cliente.email}}</li>
+                        <li class="list-group-item">{{cliente.createAt | date: "fullDate"}}</li>
+                    </ul>
+
+                    <!-- Input. -->
+                    <div class="input-group">
+                        <input (change)="seleccionarFoto($event)" type="file" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+                        <button (click)="subirFoto()" class="btn btn-outline-secondary" type="button" id="inputGroupFileAddon04">Aceptar</button>
+                    </div>
+
+                </div>
+                <div class="col-sm">
+                    <img *ngIf="cliente?.foto" src="http://localhost:8080/api/uploads/img/{{cliente.foto}}" alt="{{cliente.foto}}" class="img-thumbnail rounded">
+                </div>
+            </div>
+        </div>        
 
 
     </div>
