@@ -54,7 +54,12 @@ export class ClienteService {
     );
   }
 
-  // Crear cliente.
+  /**
+   * Crear Cliente.
+   * @param cliente 
+   * @returns 
+   */
+
   public create(cliente: Cliente): Observable<Cliente> {
     return this.http.post<Cliente>(this.urlEndPoint, cliente, {headers: this.httpHeaders}).pipe(
       // Convertir a tipo Cliente.
@@ -77,7 +82,11 @@ export class ClienteService {
     );
   }
   
-  // Obtener un cliente por su id manejando errores.
+  /**
+   * Obtener un cliente por su id manejando errores.
+   * @param id
+   * @returns 
+   */
 
   public getCliente(id): Observable<Cliente> {
     return this.http.get<Cliente>(`${this.urlEndPoint}/${id}`).pipe(
@@ -91,7 +100,11 @@ export class ClienteService {
       );
   }
 
-  // Actualizar cliente.
+  /**
+   * Actualizar cliente.
+   * @param cliente 
+   * @returns 
+   */
 
   public update(cliente: Cliente): Observable<any> {
     return this.http.put<any>(`${this.urlEndPoint}/${cliente.id}`, cliente, {headers: this.httpHeaders}).pipe(
@@ -112,10 +125,43 @@ export class ClienteService {
     );
   }
 
-  // Borrar cliente.
+  /**
+   * Borrar cliente.
+   * @param id 
+   * @returns 
+   */
   
   public delete(id): Observable<Cliente> {
     return this.http.delete<Cliente>(`${this.urlEndPoint}/${id}`, {headers: this.httpHeaders}).pipe(
+      catchError(
+        e => {
+          console.error(e.error.mensaje);
+          Swal.fire(e.error.mensaje, e.error.error, 'error');
+          return throwError(() => e);
+        }
+      )
+    );
+  }
+
+  
+  /**
+   * Subir foto.
+   * @param archivo 
+   * @param id 
+   * @returns 
+   */
+
+  public subirFoto(archivo: File, id): Observable<Cliente> {
+
+    let formData = new FormData();
+    formData.append("archivo", archivo);
+    formData.append("id", id);
+
+    return this.http.post(`${this.urlEndPoint}/upload/`, formData).pipe(
+      map(
+        // (response) => console.info(response)
+        (response: any) => response.cliente as Cliente
+      ),
       catchError(
         e => {
           console.error(e.error.mensaje);
