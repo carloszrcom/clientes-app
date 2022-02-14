@@ -1,9 +1,10 @@
-<br/>
+<!-- Componente Detalle del cliente. -->
+<detalle-cliente *ngIf="clienteSeleccionado" [cliente]="clienteSeleccionado"></detalle-cliente>
+<!-- Componente Clientes. -->
 <div class="card border-primary mb-3">
     <div class="card-header">Clientes</div>
     <div class="card-body text-primary">
       <h5 class="card-title">Listado de clientes</h5>
-
       <!-- Botón crear cliente. -->
       <div class="my-2 text-left">
           <button class="btn btn-rounded btn-primary" type="button" [routerLink]="['/clientes/form']" routerLinkActive="router-link-active" >Crear cliente</button>
@@ -27,7 +28,9 @@
           </thead>
           <tbody>
               <tr *ngFor="let cliente of clientes">
-                  <td><button type="button" [routerLink]="['/clientes/ver', cliente.id]" class="btn btn-success">{{ cliente.id }}</button></td>
+                  <!-- Forma de hacerlo antes de implementar modal. -->
+                  <!-- <td><button type="button" [routerLink]="['/clientes/ver', cliente.id]" class="btn btn-success">{{ cliente.id }}</button></td> -->
+                  <td><button (click)="abrirModal(cliente)" type="button" class="btn btn-success">{{ cliente.id }}</button></td>
                   <td>{{ cliente.nombre }}</td>
                   <!-- Convertir el apellido a mayúsculas. -->
                   <td>{{ cliente.apellidos | uppercase }}</td>

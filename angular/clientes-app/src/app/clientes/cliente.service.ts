@@ -6,6 +6,8 @@ import { Observable, throwError } from 'rxjs';
 import { map, catchError, tap } from 'rxjs/operators';
 import Swal from 'sweetalert2';
 import { Cliente } from './cliente';
+import { HttpRequest, HttpEvent } from '@angular/common/http';
+
 // import { CLIENTES } from './clientes.json';
 
 @Injectable({
@@ -151,25 +153,36 @@ export class ClienteService {
    * @returns 
    */
 
-  public subirFoto(archivo: File, id): Observable<Cliente> {
+  // Al implementar la barra de progreso ya no retorna Observable<Cliente>.
+  public subirFoto(archivo: File, id): Observable<HttpEvent<{}>> {
 
     let formData = new FormData();
     formData.append("archivo", archivo);
     formData.append("id", id);
 
-    return this.http.post(`${this.urlEndPoint}/upload`, formData).pipe(
-      map(
-        // (response) => console.info(response)
-        (response: any) => response.cliente as Cliente
-      ),
-      catchError(
-        e => {
-          console.error(e.error.mensaje);
-          Swal.fire(e.error.mensaje, e.error.error, 'error');
-          return throwError(() => e);
-        }
-      )
-    );
+    // Implementar barra de progreso.
+
+    const req = new HttpRequest('POST', `${this.urlEndPoint}/upload/`, formData, {
+      reportProgress: true
+    });
+
+    return this.http.request(req);
+
+    // Sin barra de progreso.
+
+    // return this.http.post(`${this.urlEndPoint}/upload`, formData).pipe(
+    //   map(
+    //     // (response) => console.info(response)
+    //     (response: any) => response.cliente as Cliente
+    //   ),
+    //   catchError(
+    //     e => {
+    //       console.error(e.error.mensaje);
+    //       Swal.fire(e.error.mensaje, e.error.error, 'error');
+    //       return throwError(() => e);
+    //     }
+    //   )
+    // );
   }
 
 }

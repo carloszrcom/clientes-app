@@ -40,8 +40,8 @@ const routes: Routes = [
   {path: 'clientes', component: ClientesComponent},
   {path: 'clientes/page/:page', component: ClientesComponent},
   {path: 'clientes/form', component: FormComponent},
-  {path: 'clientes/form/:id', component: FormComponent},
-  {path: 'clientes/ver/:id', component: DetalleComponent}
+  {path: 'clientes/form/:id', component: FormComponent}
+  // {path: 'clientes/ver/:id', component: DetalleComponent} // No se va a usar por implementar modal.
 ];
 
 @NgModule({
