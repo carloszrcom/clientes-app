@@ -90,6 +90,15 @@ export class DetalleComponent implements OnInit {
           } else if (event.type === HttpEventType.Response) {
             let response: any = event.body;
             this.cliente = response.cliente as Cliente;
+
+            // Notificar upload para refrescar el listado de clientes con la foto que se ha subido.
+            // Emitimos el objeto cliente, que es quien tiene la nueva foto. Tenemos que suscribirnos
+            // a este EventEmitter, y lo hacemos en el listado de clientes (clientes.component) dentro del 
+            // onInit.
+
+            this.modalService.notificarUpload.emit(this.cliente);
+
+
             Swal.fire('La foto se ha subido completamente', response.mensaje, 'success');
           }
         }
@@ -105,7 +114,9 @@ export class DetalleComponent implements OnInit {
     }
   }
 
-  // Cerrar la ventana modal de detalle de cliente.
+  /**
+   * Cerrar la ventana modal de detalle de cliente.
+   */
 
   public cerrarModalDetalleComponent() {
     

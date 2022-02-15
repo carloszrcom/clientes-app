@@ -52,6 +52,21 @@ export class ClientesComponent implements OnInit {
           });
       }
     );
+
+    // Actualizar la foto en el listado.
+
+    this.modalService.notificarUpload.subscribe( 
+      cliente => {
+        this.clientes = this.clientes.map(
+          clienteOriginal => {
+            if (cliente.id == clienteOriginal.id) {
+              clienteOriginal.foto = cliente.foto;
+            }
+            return clienteOriginal;
+          }
+        );
+      }
+    );
   }
 
   /**
