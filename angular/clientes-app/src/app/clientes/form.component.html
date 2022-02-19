@@ -54,8 +54,6 @@
                     </div>
                 </div>
             </div>
-
-
             <!-- Fecha. -->
             <div class="form-group row my-2">
                 <label for="createAt" class="col-form-label col-sm-2">Fecha</label>
@@ -69,12 +67,20 @@
                     <mat-datepicker-toggle matSuffix [for]="miPicker"></mat-datepicker-toggle>
                     <!-- Con # estamos creando una variable de contexto de la vista que contiene una referencia de componente. -->
                     <mat-datepicker #miPicker></mat-datepicker>
-
                 </div>
             </div>
-
-
-
+            <!-- Región. -->
+            <div class="form-group row my-2">
+                <label for="region" class="col-form-label col-sm-2">Región</label>
+                <div class="col-sm-6">
+                    <select class="form-select" [compareWith]="compararRegion" [(ngModel)]="cliente.region" name="region" style="width: 400px;">
+                        <!-- Deja marcado un primer option si región tiene undefined. -->
+                        <option [ngValue]="undefined">--- Seleccionar una región ---</option>
+                        <option *ngFor="let region of regiones" [ngValue]="region">{{region.nombre}}</option>
+                    </select>
+                </div>
+            </div>
+            <!-- Botón de Crear/Actualizar. -->
             <div class="form-group row my-3">
                 <div class="col-sm-6">
                     <button class="btn btn-primary" role="button" (click)="create()" *ngIf="!cliente.id; else elseBlock;" [disabled]="!clienteForm.form.valid">Crear</button>

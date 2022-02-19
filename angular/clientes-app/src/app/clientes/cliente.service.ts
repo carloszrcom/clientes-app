@@ -6,6 +6,7 @@ import { Observable, throwError } from 'rxjs';
 import { map, catchError, tap } from 'rxjs/operators';
 import Swal from 'sweetalert2';
 import { Cliente } from './cliente';
+import { Region } from './region';
 import { HttpRequest, HttpEvent } from '@angular/common/http';
 
 // import { CLIENTES } from './clientes.json';
@@ -19,6 +20,14 @@ export class ClienteService {
   private httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
 
   constructor(private http: HttpClient, private router: Router) {}
+
+  /**
+   * Devuelve el listado de regiones.
+   * @returns 
+   */
+  public getRegiones(): Observable<Region[]> {
+    return this.http.get<Region[]>(this.urlEndPoint + '/regiones');
+  }
 
   public getClientes(page: number): Observable<any> {
     
@@ -61,7 +70,6 @@ export class ClienteService {
    * @param cliente 
    * @returns 
    */
-
   public create(cliente: Cliente): Observable<Cliente> {
     return this.http.post<Cliente>(this.urlEndPoint, cliente, {headers: this.httpHeaders}).pipe(
       // Convertir a tipo Cliente.
@@ -89,7 +97,6 @@ export class ClienteService {
    * @param id
    * @returns 
    */
-
   public getCliente(id): Observable<Cliente> {
     return this.http.get<Cliente>(`${this.urlEndPoint}/${id}`).pipe(
       catchError(e => {
@@ -184,5 +191,4 @@ export class ClienteService {
     //   )
     // );
   }
-
 }

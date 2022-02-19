@@ -68,9 +68,12 @@ public class Cliente implements Serializable {
 	// Si omitimos la anotación JoinColumn, va a generar de todas formas un campo, pero mejor no omitirlo.
 	// El proxy genera atributos adicionales. Mejor ignorarlos para que no de error.
 	
+	// Para que no devuelva error ignoramos los atributos creados por Spring.
+	// Pero no devuelve error, por lo que se deja comentado.
+	// @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	@NotNull(message =  "la región no puede estar vacía.")
 	@ManyToOne
 	@JoinColumn(name = "region_id")
-	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private Region region;
 	
 	/**

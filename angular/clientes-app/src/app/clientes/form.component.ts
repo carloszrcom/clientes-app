@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import swal from 'sweetalert2';
 import { Cliente } from './cliente';
 import { ClienteService } from './cliente.service';
+import { Region } from './region';
 
 
 @Component({
@@ -12,9 +13,8 @@ import { ClienteService } from './cliente.service';
 export class FormComponent implements OnInit {
 
   public titulo: string;
-
   public cliente: Cliente = new Cliente();
-
+  public regiones: Region[];
   public errores: string[];
 
   constructor(
@@ -25,6 +25,12 @@ export class FormComponent implements OnInit {
 
   ngOnInit(): void {
     this.cargarCliente();
+
+    // Cargar el listado de regiones.
+
+    this.clienteService.getRegiones().subscribe(
+      regiones => this.regiones = regiones
+    );
   }
 
   // Cargar cliente.
@@ -76,5 +82,17 @@ export class FormComponent implements OnInit {
         console.error(err.error.errors);
       }
     );
-  }  
+  }
+
+  // Comparar región para dejar marcado al aceptar el formulario.
+  public compararRegion(o1: Region, o2: Region): boolean {
+
+      // Condiciones para marcar el option de seleccionar objeto.
+      if (o1 === undefined && o2 === undefined) {
+        return true
+      }
+
+
+    return o1 == null || o2 == null ? false: o1.id === o2.id;
+  }
 }
